@@ -1,7 +1,7 @@
 ---
 # layout: page
-title: About Chris
-description: "Poet, Novelist, Essayist, Screenwriter and Humanist."
+title: Insiderlyc
+description: "Poet, Novelist, Essayist, Songwriter."
 draft: false
 layout: "../layouts/Page.astro"
 ---
