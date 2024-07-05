@@ -3,8 +3,8 @@ import yaml from '@rollup/plugin-yaml';
 
 export default defineConfig({
 
-    siteName: "Chris Abani",
-    site: 'https://www.chrisabani.com',
+    siteName: "Insiderlyc",
+    site: '',
     build: {
         compact: true
     },
