@@ -1,0 +1,106 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  permalink: string;
+  publishDate: string;
+  ogImageUrl: string;
+  canonicalURL?: string;
+}
+
+import site from "../data/site.js";
+import "../styles/global.css";
+
+const { title, description,  permalink, publishDate, ogImageUrl, canonicalURL } =
+  Astro.props;
+
+
+const markdownFilters = /\*/g;
+
+
+let fullTitle = title ? title + " | " + site.title : site.title;
+let fullDesc = description ? description.replace(markdownFilters, "") + " | " + site.description : site.description;
+
+
+//console.log("log: ", description)
+// if (import.meta.env.DEV == true) {
+//   console.log("dev", import.meta.env.DEV);
+// } else {
+//   console.log("pro", import.meta.env.DEV);
+// }
+---
+
+<link rel="preload" as="font" type="font/woff2" href="./../../fonts/amatic-sc-v24-latin-regular.woff2" crossorigin />
+
+<script>
+  import Alpine from "alpinejs";
+  window.Alpine = Alpine;
+  Alpine.start();
+</script>
+
+
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={fullDesc} />
+
+<!-- Canonical -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL || site.url} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={fullDesc} />
+<meta property="og:image" content={ogImageUrl ? `${site.url}${ogImageUrl}` : `${site.url}${site.socialImage}`} />
+
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL || site.url} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={fullDesc} />
+<meta property="twitter:image" content={ogImageUrl ? `${site.url}${ogImageUrl}` : `${site.url}${site.socialImage}`} />
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title={`${site.name} Blog`} href={`${site.url}/feed/blog.xml`} />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<style>
+  @font-face {
+    font-family: 'Amatic SC';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+      url('./../../fonts/amatic-sc-v24-latin-regular.woff2') format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url('./../../fonts/amatic-sc-v24-latin-regular.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
+  /* ibm-plex-sans-condensed-regular - latin */
+  @font-face {
+    font-family: 'IBM Plex Sans Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+      url('./../../fonts/ibm-plex-sans-condensed-v13-latin-regular.woff2') format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url('./../../fonts/ibm-plex-sans-condensed-v13-latin-regular.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+</style>

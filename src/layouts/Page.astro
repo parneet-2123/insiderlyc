@@ -1,0 +1,25 @@
+---
+import PageTitle from "../components/PageTitle.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+  export interface Props {
+    bgImage?: string;
+  }
+  const { bgImage = "url(/uploads/bg-cartographer_darker.jpg)" } = Astro.props as Props;
+
+  const { content } = Astro.props;
+  const { title, description, publishDate, author, heroImage, permalink, alt } =
+    content;
+
+
+---
+
+<BaseLayout content={{ title, description, bgImage }}>
+  <div class="min-h-screen">
+    <article class="p-4 lg:p-24 w-3/4 mx-auto text-white">
+      <PageTitle content={{ title, description }} />
+      <div class="prose lg:prose-lg prose-invert mx-auto mt-8 page-layout">        
+        <slot />        
+      </div>
+    </article>
+  </div>
+</BaseLayout>
